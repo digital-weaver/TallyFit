@@ -3,104 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TallyFit - Privacy Policy</title>
+    <meta name="description" content="TallyFit Privacy Policy - Your data stays on your device">
+    <title>Privacy Policy - TallyFit</title>
     <style>
         :root {
-            --primary-color: #8A2BE2;
-            --accent-color: #00BFFF;
-            --highlight-color: #FF69B4;
-            --background-color: #0A0A0A;
-            --text-color: #FFFFFF;
+            --primary: #7f00ff;
+            --secondary: #00b4db;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --background: #f7fafc;
+            --card-bg: white;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 15px;
+            --max-width: 800px;
+            --spacing: 2rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-primary: #f7fafc;
+                --text-secondary: #e2e8f0;
+                --background: #1a202c;
+                --card-bg: #2d3748;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: var(--background-color);
-            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 20px;
+            background: var(--background);
+            color: var(--text-primary);
         }
 
         .container {
-            max-width: 800px;
+            width: min(var(--max-width), 95%);
             margin: 0 auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+            padding: var(--spacing);
+        }
+
+        .header {
+            text-align: center;
+            padding: var(--spacing) 0;
+            margin-bottom: var(--spacing);
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            object-fit: cover;
+            transition: transform 0.2s;
+        }
+
+        .app-icon:hover {
+            transform: scale(1.05);
+        }
+
+        .content {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: var(--spacing);
+            margin: 1rem 0;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .content:hover {
+            transform: translateY(-2px);
         }
 
         h1 {
-            color: var(--accent-color);
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 1em;
-            text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         h2 {
-            color: var(--highlight-color);
-            margin-top: 1.5em;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5em;
+            color: var(--primary);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
 
         a {
-            color: var(--accent-color);
+            color: var(--secondary);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
+            font-weight: 500;
         }
 
         a:hover {
-            color: var(--highlight-color);
-            text-shadow: 0 0 8px rgba(255, 105, 180, 0.5);
+            color: var(--primary);
         }
 
-        .nav-links {
+        .footer {
             text-align: center;
-            margin-top: 2em;
-            padding-top: 1em;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: var(--spacing) 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
         .button {
             display: inline-block;
-            padding: 10px 20px;
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-            border-radius: 25px;
+            padding: 0.8rem 1.6rem;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white;
-            margin: 10px;
-            transition: all 0.3s ease;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: var(--shadow);
         }
 
         .button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            :root {
+                --spacing: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+
+            .app-icon {
+                width: 100px;
+                height: 100px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="header">
+        <img src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg" alt="TallyFit Icon" class="app-icon">
         <h1>Privacy Policy</h1>
-        
-        <p><strong>TallyFit does not collect, store, or share any personal data. We respect your privacy and are committed to protecting it.</strong></p>
-        
-        <p>Effective Date: 09/30/2024</p>
-
-        <h2>Information Collection and Use</h2>
-        <p>TallyFit does not collect, store, or transmit any personal data. All information you enter into the app is stored locally on your device.</p>
-
-        <h2>Data Sharing</h2>
-        <p>When you choose to share a workout routine, only the information you've entered about that routine is shared. This sharing is initiated by you, and the data is only sent to the recipient you choose.</p>
-
-        <h2>Data Security</h2>
-        <p>As all data is stored locally on your device, the security of your information is protected by your device's built-in security features.</p>
-
-        <div class="nav-links">
-            <a href="support.html" class="button">Support</a>
-            <a href="mailto:magenta.sewing.04@icloud.com" class="button">Contact Us</a>
+    </div>
+    
+    <div class="container">
+        <div class="content">
+            <p><span class="highlight">TallyFit respects your privacy.</span> We don't collect, store, or share any personal data.</p>
+            <p>Effective Date: 09/30/2024</p>
+            
+            <h2>Information Collection and Use</h2>
+            <p>TallyFit stores all your data locally on your device. We never transmit or collect your personal information.</p>
+            
+            <h2>Data Storage</h2>
+            <p>All your custom exercises, routines, and preferences are stored securely on your device only.</p>
+            
+            <h2>Data Sharing</h2>
+            <p>Sharing workout routines is entirely under your control. Only the specific routine information you choose to share will be transmitted.</p>
+            
+            <h2>Third-Party Services</h2>
+            <p>We don't integrate with any third-party services that collect data.</p>
+            
+            <h2>Contact Us</h2>
+            <p>Questions? Email us at: <a href="mailto:magenta.sewing.04@icloud.com">magenta.sewing.04@icloud.com</a></p>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="support.html" class="button">Need Help?</a>
+            </div>
         </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2024 TallyFit. All rights reserved.</p>
     </div>
 </body>
 </html>
