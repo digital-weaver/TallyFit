@@ -84,13 +84,13 @@
             transform: translateY(-2px);
         }
 
-    h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin: 0.5rem 0;
-        color: white;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
 
         h2 {
             color: var(--primary);
@@ -101,6 +101,16 @@
         p {
             color: var(--text-secondary);
             margin-bottom: 1rem;
+        }
+
+        ul {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
         }
 
         a {
@@ -139,18 +149,20 @@
             color: white;
         }
 
-        .highlight {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 600;
-        }
-
         .support-card {
             border-left: 4px solid var(--primary);
             padding-left: 1rem;
             margin: 1.5rem 0;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
 
         @media (max-width: 640px) {
@@ -171,29 +183,76 @@
 </head>
 <body>
     <div class="header">
-        <img src="362D852E-7DF7-476C-B398-D5C67B0E4782.jpg" alt="TallyFit Icon" class="app-icon">
+        <img src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg" alt="TallyFit Icon" class="app-icon">
         <h1>Support</h1>
     </div>
     
     <div class="container">
         <div class="content">
             <h2>Need Help with TallyFit?</h2>
-            <p><span class="highlight">We're here to help you succeed</span> in your fitness journey!</p>
-            
+            <p>We're here to help you make the most of your fitness journey with TallyFit!</p>
+
             <div class="support-card">
                 <h2>Quick Support</h2>
                 <p>Email us at: <a href="mailto:magenta.sewing.04@icloud.com">magenta.sewing.04@icloud.com</a></p>
                 <p>We respond to all inquiries within 48 hours.</p>
             </div>
-<!--             
-            <div class="support-card">
-                <h2>Common Questions</h2>
-                <p>• How do I create a custom workout?</p>
-                <p>• Can I share my routines with friends?</p>
-                <p>• How do I track my progress?</p>
-                <p>Email us for detailed guidance on these or any other questions!</p>
-            </div> -->
-            
+
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <p class="faq-question">How do I create an account?</p>
+                <p>Tap the Profile tab and select "Create Account". Enter your email address and follow the verification steps. Your workouts will automatically sync across devices when you're signed in.</p>
+            </div>
+
+            <div class="faq-item">
+                <p class="faq-question">How does Tally (AI Assistant) work?</p>
+                <p>Tally is your AI workout partner that helps create personalized routines. Simply tell Tally your goals, preferences, and limitations, and it will suggest appropriate workouts. Remember that AI suggestions should be evaluated for your personal fitness level.</p>
+            </div>
+
+            <div class="faq-item">
+                <p class="faq-question">How do I manage my subscription?</p>
+                <p>You can manage your subscription through your Apple ID settings:</p>
+                <ul>
+                    <li>Open iPhone Settings</li>
+                    <li>Tap your Apple ID at the top</li>
+                    <li>Tap Subscriptions</li>
+                    <li>Find TallyFit to manage or cancel</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <p class="faq-question">How do I sync my workouts across devices?</p>
+                <p>Once you're signed in to your account, your workouts automatically sync when you have an internet connection. You can still create and track workouts offline - they'll sync when you're back online.</p>
+            </div>
+
+            <div class="faq-item">
+                <p class="faq-question">What if Tally gives me inappropriate workout suggestions?</p>
+                <p>While Tally aims to provide helpful suggestions, you should always:</p>
+                <ul>
+                    <li>Review suggestions for your fitness level</li>
+                    <li>Start with lighter weights/intensity</li>
+                    <li>Stop if something feels wrong</li>
+                    <li>Report inappropriate suggestions to support</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <p class="faq-question">How do I export or delete my data?</p>
+                <p>To export your data or request account deletion, email us with your account email address. We'll process your request within 48 hours.</p>
+            </div>
+
+            <h2>Still Need Help?</h2>
+            <p>We're committed to providing you the best support possible. Contact us with any questions about:</p>
+            <ul>
+                <li>Account issues</li>
+                <li>Subscription management</li>
+                <li>AI assistant feedback</li>
+                <li>Sync problems</li>
+                <li>Feature requests</li>
+                <li>Bug reports</li>
+            </ul>
+
             <div style="text-align: center; margin-top: 2rem;">
                 <a href="terms.html" class="button">Terms of Use</a>
                 <a href="privacy-policy.html" class="button" style="margin-left: 1rem;">Privacy Policy</a>
