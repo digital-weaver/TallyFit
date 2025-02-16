@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="TallyFit – Your modern fitness companion. Watch our promo, learn more about our app, and read our policies.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="TallyFit – Your modern fitness companion. Watch our promo video, learn more about our app, and read our policies."/>
   <title>TallyFit – Modern Fitness App</title>
   <style>
-    /* CSS Variables & Base Styles */
+    /* CSS Variables */
     :root {
       --primary: #7f00ff;
       --secondary: #00b4db;
@@ -29,8 +29,8 @@
       }
     }
     * {
-      margin: 0;
-      padding: 0;
+      margin: 0; 
+      padding: 0; 
       box-sizing: border-box;
     }
     body {
@@ -48,8 +48,8 @@
     a:hover {
       color: var(--primary);
     }
-    
-    /* Navigation Bar */
+
+    /* Header / Navigation */
     header {
       position: fixed;
       width: 100%;
@@ -84,8 +84,8 @@
     .appstore-btn:hover {
       transform: translateY(-2px);
     }
-    
-    /* Video Hero & Animation */
+
+    /* Video Hero Container */
     .video-container {
       position: fixed;
       top: 0;
@@ -101,18 +101,34 @@
       height: 100%;
       object-fit: cover;
     }
-    /* When minimized, the video shrinks into a corner */
+    /* Minimized state: shrink into top-right corner, keep aspect ratio */
     .video-container.minimized {
       width: 320px;
-      height: 180px;
+      height: auto; /* let the video keep its aspect ratio */
       top: 1rem;
       right: 1rem;
       left: auto;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
-    
-    /* Main Content Container */
+    /* Mute button (overlay on video) */
+    .mute-button {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 9999;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+
+    /* Main Container */
     main {
       margin-top: calc(100vh + 1rem);
       max-width: var(--max-width);
@@ -127,7 +143,7 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
-    h1, h2 {
+    h1, h2, h3 {
       margin-bottom: 1rem;
     }
     h1 {
@@ -149,18 +165,11 @@
     li {
       margin-bottom: 0.5rem;
     }
-    
-    /* Responsive Adjustments */
+
+    /* Responsive adjustments */
     @media (max-width: 640px) {
       :root {
         --spacing: 1rem;
-      }
-      h1 {
-        font-size: 2rem;
-      }
-      .video-container.minimized {
-        width: 280px;
-        height: 157px;
       }
       nav {
         flex-direction: column;
@@ -171,8 +180,14 @@
       main {
         margin-top: calc(100vh + 0.5rem);
       }
+      .video-container.minimized {
+        width: 280px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
     }
-    
+
     /* Footer */
     footer {
       text-align: center;
@@ -187,7 +202,6 @@
   <header>
     <nav>
       <div class="logo">
-        <!-- You can replace this with your logo image if desired -->
         <strong>TallyFit</strong>
       </div>
       <div class="nav-links">
@@ -201,18 +215,19 @@
       </a>
     </nav>
   </header>
-  
-  <!-- Fullscreen Video Hero -->
+
+  <!-- Video Hero -->
   <div id="video-hero" class="video-container">
-    <video autoplay muted playsinline>
-      <source src="886x1920 TFVideo.mov" type="video/mp4">
+    <video id="promoVideo" autoplay muted loop playsinline>
+      <source src="886x1920 TFVideo.mov" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
+    <button id="muteBtn" class="mute-button">Unmute</button>
   </div>
-  
+
   <!-- Main Content -->
   <main>
-    <!-- Home Section -->
+    <!-- HOME Section -->
     <section id="home">
       <h1>Welcome to TallyFit</h1>
       <p>
@@ -222,14 +237,15 @@
       <p>
         Whether you're a beginner or a seasoned athlete, TallyFit is designed to adapt to your fitness needs.
       </p>
-      <!-- You can insert promotional screenshots or additional images below -->
-      <img src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg" alt="TallyFit App Icon" style="width:120px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 1rem;">
+      <img src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg"
+           alt="TallyFit App Icon"
+           style="width:120px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 1rem;">
     </section>
-    
-    <!-- Privacy Policy Section -->
+
+    <!-- PRIVACY Section -->
     <section id="privacy">
       <h2>Privacy Policy</h2>
-      <p>Effective Date: October 27, 2024</p>
+      <p><strong>Effective Date:</strong> October 27, 2024</p>
       <h3>1. Introduction</h3>
       <p>TallyFit respects your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our app.</p>
       <h3>2. Information We Collect</h3>
@@ -251,7 +267,7 @@
         <li>Communicating important updates</li>
       </ul>
       <h3>4. Data Storage and Security</h3>
-      <p>Your data is stored securely using industry-standard encryption. We use Firebase for authentication and data storage, ensuring your information is protected according to Google's security standards. However, no method of data transmission or storage can be guaranteed to be 100% secure. You acknowledge that you use TallyFit at your own risk.</p>
+      <p>Your data is stored securely using industry-standard encryption. We use Firebase for authentication and data storage, ensuring your information is protected according to Google's security standards. However, no method of data transmission or storage can be guaranteed 100% secure. You acknowledge that you use TallyFit at your own risk.</p>
       <h3>5. AI Features and Data Processing</h3>
       <p>Our AI assistant, Tally, processes your workout preferences and conversations to provide personalized recommendations. This data is:</p>
       <ul>
@@ -283,14 +299,14 @@
       <p>For privacy-related questions, contact us at: <a href="mailto:magenta.sewing.04@icloud.com">magenta.sewing.04@icloud.com</a></p>
       <h3>11. Disclaimer and Limitation of Liability</h3>
       <p>
-        By using TallyFit, you agree that your use is at your sole risk. We make no warranties or representations regarding the accuracy of data,
-        including AI-generated suggestions. TallyFit is provided “as is” and without guarantees of uninterrupted operation. To the fullest extent permitted by law,
-        we disclaim liability for any damages arising from your use.
+        By using TallyFit, you agree that your use is at your sole risk. We make no warranties or representations regarding the accuracy of data, including AI-generated suggestions. 
+        TallyFit is provided “as is” and without guarantees of uninterrupted operation. 
+        To the fullest extent permitted by law, we disclaim liability for any damages arising from your use.
       </p>
       <p>If you do not agree to this policy, please discontinue using TallyFit immediately.</p>
     </section>
-    
-    <!-- Support Section -->
+
+    <!-- SUPPORT Section -->
     <section id="support">
       <h2>Support</h2>
       <h3>Need Help with TallyFit?</h3>
@@ -303,11 +319,14 @@
       <h3>Frequently Asked Questions</h3>
       <div style="margin-bottom: 1.5rem;">
         <p style="font-weight:600; color: var(--primary);">How do I create an account?</p>
-        <p>Tap the Profile tab and select "Create Account". Enter your email and follow the verification steps. Your workouts will automatically sync across devices when signed in.</p>
+        <p>Tap the Profile tab and select "Create Account". Enter your email and follow the verification steps. Your workouts sync across devices when signed in.</p>
       </div>
       <div style="margin-bottom: 1.5rem;">
         <p style="font-weight:600; color: var(--primary);">How does Tally (AI Assistant) work?</p>
-        <p>Tally is your AI workout partner that helps create personalized routines, exercises, stretches, and yoga sessions. Tell Tally your goals and preferences to get tailored suggestions – always verify for accuracy.</p>
+        <p>
+          Tally is your AI workout partner that helps create personalized routines and exercises. 
+          Share your goals and limitations to get tailored suggestions. Always verify for accuracy and safety.
+        </p>
       </div>
       <div style="margin-bottom: 1.5rem;">
         <p style="font-weight:600; color: var(--primary);">How do I manage my subscription?</p>
@@ -321,33 +340,45 @@
       </div>
       <div style="margin-bottom: 1.5rem;">
         <p style="font-weight:600; color: var(--primary);">How do I sync my workouts across devices?</p>
-        <p>Once signed in, your workouts sync automatically when connected to the internet. You can create and track workouts offline and they’ll sync once you’re back online.</p>
+        <p>
+          Once signed in, your workouts sync automatically when online. You can still create workouts offline; 
+          they’ll sync when you reconnect.
+        </p>
       </div>
       <div style="margin-bottom: 1.5rem;">
         <p style="font-weight:600; color: var(--primary);">What if Tally gives me inappropriate or incorrect suggestions?</p>
-        <p>Review all suggestions for personal suitability. Start with lower intensity, stop if something feels wrong, and report any unsafe suggestions to support.</p>
+        <p>Review all suggestions for personal suitability. Start with lower intensity, stop if something feels wrong, and report unsafe suggestions to support.</p>
       </div>
       <div style="margin-bottom: 1.5rem;">
         <p style="font-weight:600; color: var(--primary);">How do I export or delete my data?</p>
-        <p>To export your data or request deletion, email us with your account email. We aim to process requests within 48 hours, though delays may occur.</p>
+        <p>
+          Email us your request from your account email. We aim to process within 48 hours, though delays may occur.
+        </p>
       </div>
       <h3>Important Disclaimer</h3>
       <p>
-        TallyFit and its AI assistant are provided on an “as is” basis. We make no guarantees about the accuracy, reliability, or completeness of the information.
-        You agree to use TallyFit at your own risk. Always consult a professional for personalized medical or fitness advice.
+        TallyFit and its AI assistant are provided on an “as is” basis. We make no guarantees about the accuracy or completeness of AI-generated information.
+        You agree to use TallyFit at your own risk. Consult a professional for personalized advice.
       </p>
       <h3>Still Need Help?</h3>
-      <p>Contact us for inquiries about account issues, subscription management, AI assistant feedback, sync problems, feature requests, or bug reports.</p>
+      <p>Contact us for inquiries on account issues, subscription management, AI feedback, sync problems, feature requests, or bug reports.</p>
     </section>
-    
-    <!-- Terms of Use Section -->
+
+    <!-- TERMS Section -->
     <section id="terms">
       <h2>Terms of Use</h2>
-      <p>Effective Date: October 27, 2024</p>
+      <p><strong>Effective Date:</strong> October 27, 2024</p>
       <h3>1. Acceptance of Terms</h3>
-      <p>By downloading, installing, or using TallyFit, you agree to these Terms of Use and our Privacy Policy. If you disagree with any part, please do not use the app.</p>
+      <p>
+        By downloading, installing, or using TallyFit, you agree to these Terms of Use and our Privacy Policy. 
+        If you disagree with any part, please do not use the app.
+      </p>
       <h3>2. Account Creation and Security</h3>
-      <p>To use TallyFit’s sync and AI features, you must create an account. You agree to provide accurate information, keep your credentials secure, and notify us of any unauthorized access.</p>
+      <p>
+        To use TallyFit’s sync and AI features, you must create an account. 
+        You agree to provide accurate information, keep your credentials secure, 
+        and notify us of any unauthorized access.
+      </p>
       <h3>3. Subscription Terms</h3>
       <p>TallyFit offers the following auto-renewing subscriptions:</p>
       <ul>
@@ -363,40 +394,73 @@
         <li>Unused free trial portion forfeited on subscription purchase</li>
       </ul>
       <h3>4. AI Assistant (Tally)</h3>
-      <p>Our AI assistant provides personalized workout recommendations. You acknowledge that AI-generated content is experimental, may be inaccurate, and should be evaluated for your safety.</p>
+      <p>
+        Our AI assistant provides personalized workout recommendations. 
+        You acknowledge that AI-generated content is experimental, may be inaccurate, 
+        and should be evaluated for your safety.
+      </p>
       <ul>
         <li>AI responses are not professional medical or fitness advice</li>
         <li>You consent to your interactions being used to improve the AI service</li>
       </ul>
       <h3>5. Data Sync and Storage</h3>
-      <p>TallyFit synchronizes data across devices using secure cloud servers (Firebase). An internet connection is required for syncing. Local backups are recommended.</p>
+      <p>
+        TallyFit synchronizes data across devices using secure cloud servers (Firebase). 
+        An internet connection is required for syncing. Local backups are recommended.
+      </p>
       <h3>6. Health and Safety</h3>
-      <p>Consult healthcare providers before starting any exercise program. Exercise within your limits and stop if you experience pain. The app is not a substitute for professional advice.</p>
+      <p>
+        Consult healthcare providers before starting any exercise program. Exercise within your limits and stop if you experience pain. 
+        The app is not a substitute for professional advice.
+      </p>
       <h3>7. User Content</h3>
-      <p>You retain ownership of your custom workouts and routines. By using TallyFit, you grant us a license to store and display your content. We may remove harmful or inappropriate content.</p>
+      <p>
+        You retain ownership of your custom workouts and routines. By using TallyFit, 
+        you grant us a license to store and display your content. We may remove harmful or inappropriate content.
+      </p>
       <h3>8. Limitation of Liability</h3>
-      <p>TallyFit, its creators, affiliates, and employees are not liable for any damages arising from your use of the app or AI assistant. Use TallyFit at your own risk.</p>
+      <p>
+        TallyFit, its creators, affiliates, and employees are not liable for any damages arising from your use of the app or AI assistant. 
+        Use TallyFit at your own risk.
+      </p>
       <h3>9. Privacy and Data Protection</h3>
-      <p>We protect your data as described in our <a href="#privacy">Privacy Policy</a>. While we strive for security, we cannot guarantee absolute protection.</p>
+      <p>
+        We protect your data as described in our <a href="#privacy">Privacy Policy</a>. 
+        While we strive for security, we cannot guarantee absolute protection.
+      </p>
       <h3>10. Changes to Terms</h3>
-      <p>We may update these terms. Continued use after changes indicates your acceptance. Major changes will be notified in-app.</p>
+      <p>We may update these terms. Continued use after changes indicates acceptance. Major changes will be notified in-app.</p>
       <h3>11. Contact</h3>
       <p>Questions? Contact us at: <a href="mailto:magenta.sewing.04@icloud.com">magenta.sewing.04@icloud.com</a></p>
     </section>
   </main>
-  
-  <!-- Footer -->
+
   <footer>
     <p>© 2024 digital-weaver. All rights reserved.</p>
   </footer>
-  
-  <!-- JavaScript for Video Animation -->
+
   <script>
-    // After 5 seconds, add the "minimized" class to the video container to trigger the CSS transition.
+    /* After 5 seconds, minimize the video */
     window.addEventListener("load", function() {
       setTimeout(function() {
         document.getElementById("video-hero").classList.add("minimized");
       }, 5000);
+    });
+
+    /* Mute/Unmute Toggle */
+    const promoVideo = document.getElementById("promoVideo");
+    const muteBtn = document.getElementById("muteBtn");
+
+    muteBtn.addEventListener("click", function() {
+      if (promoVideo.muted) {
+        // Unmute
+        promoVideo.muted = false;
+        muteBtn.textContent = "Mute";
+      } else {
+        // Mute
+        promoVideo.muted = true;
+        muteBtn.textContent = "Unmute";
+      }
     });
   </script>
 </body>
