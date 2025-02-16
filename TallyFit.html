@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <!-- Apple Smart App Banner (Optional) -->
   <meta name="apple-itunes-app" content="app-id=6737364770" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0"/>
   <meta name="description" content="TallyFit – Your modern fitness companion. Watch our promo video, learn more about our app, and read our policies."/>
   <title>TallyFit – Modern Fitness App</title>
   <style>
@@ -53,7 +52,6 @@
       color: var(--primary);
     }
 
-    /* Light vs. Dark Logo */
     .logo-img-dark {
       display: none;
     }
@@ -66,12 +64,11 @@
       }
     }
 
-    /********************************
-     NAVIGATION BAR
-    *********************************/
+    /* NAVIGATION */
     header {
       position: fixed;
-      top: 0; left: 0;
+      top: 0; 
+      left: 0;
       width: 100%;
       background: var(--card-bg);
       box-shadow: var(--shadow);
@@ -81,13 +78,12 @@
       max-width: var(--max-width);
       margin: 0 auto;
       display: flex;
-      flex-wrap: wrap; /* Default: multi-row in portrait */
+      flex-wrap: wrap; 
       align-items: center;
       padding: 0 1rem;
       min-height: var(--navbar-height);
       gap: 0.5rem;
     }
-    /* We'll create 3 sections: left (logo+name), center (links), right (download). We'll reorder them for mobile portrait vs. landscape. */
     .nav-left, .nav-right, .nav-center {
       display: flex;
       align-items: center;
@@ -125,31 +121,26 @@
       transform: translateY(-2px);
     }
 
-    /* Default (portrait) layout: 2 rows
-       Row 1: nav-left (logo+title) + nav-right (download)
-       Row 2: nav-center (links) */
+    /* Portrait: 2 rows */
     .nav-left {
       order: 1;
-      flex: 0 0 auto; /* left side */
+      flex: 0 0 auto;
     }
     .nav-right {
       order: 2;
-      margin-left: auto; /* push download to far right on the same row as nav-left */
+      margin-left: auto;
       flex: 0 0 auto;
     }
     .nav-center {
       order: 3;
-      flex: 1 1 100%; /* full row */
+      flex: 1 1 100%;
       justify-content: center;
     }
 
-    /********************************
-     LANDSCAPE LAYOUT
-     Single row: left (logo+name), center+right combined 
-    *********************************/
+    /* Landscape: 1 row */
     @media (orientation: landscape) and (min-width: 641px) {
       nav {
-        flex-wrap: nowrap; /* single row in landscape */
+        flex-wrap: nowrap; 
       }
       .nav-left {
         order: 1;
@@ -160,13 +151,11 @@
       }
       .nav-right {
         order: 3;
-        margin-left: 1rem; /* slight spacing from the links */
+        margin-left: 1rem; 
       }
     }
 
-    /********************************
-     MAIN CONTENT
-    *********************************/
+    /* MAIN */
     main {
       margin-top: var(--navbar-height);
       max-width: var(--max-width);
@@ -183,7 +172,7 @@
       scroll-margin-top: calc(var(--navbar-height) + 10px);
     }
 
-    /* Home Section Layout */
+    /* HOME */
     #home .home-container {
       display: flex;
       flex-wrap: wrap;
@@ -215,7 +204,6 @@
       height: 100%;
       object-fit: cover;
     }
-    /* Fullscreen mode: scale by top/bottom => object-fit: contain, height:100% */
     .video-container.maximized {
       position: fixed;
       top: 0;
@@ -224,14 +212,14 @@
       height: 100vh;
       border-radius: 0;
       z-index: 9999;
-      display: flex; /* so we can center the video horizontally if it’s narrower */
+      display: flex;
       align-items: center; 
       justify-content: center;
     }
     .video-container.maximized video {
-      height: 100%;      /* Fill screen vertically */
-      width: auto;       /* Let the width scale automatically */
-      object-fit: contain; /* So the top/bottom bounds define scaling */
+      height: 100%; 
+      width: auto;  
+      object-fit: contain; 
     }
     .toggleSizeBtn {
       position: absolute;
@@ -284,8 +272,12 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Additional Mobile adjustments */
-    @media (max-width: 640px) {
+    /* Extra top padding in portrait so nav content isn't cramped */
+    @media (max-width: 640px) and (orientation: portrait) {
+      nav {
+        padding-top: 1rem; /* extra space up top */
+        padding-bottom: 0.5rem;
+      }
       .app-name {
         font-size: 1rem;
       }
@@ -303,7 +295,7 @@
         width: 160px;
       }
       main {
-        margin-top: calc(var(--navbar-height) + 10px);
+        margin-top: calc(var(--navbar-height) + 15px); 
       }
     }
   </style>
@@ -327,17 +319,14 @@
         <span class="app-name">TallyFit</span>
       </div>
 
-      <!-- Nav right: in portrait, the Download button is on row 1, links on row 2. 
-           In landscape, all appear in a single row. -->
+      <!-- Right: Download Button -->
       <div class="nav-right">
         <a class="appstore-btn" href="https://apps.apple.com/us/app/tallyfit/id6737364770" target="_blank">
           Download
         </a>
       </div>
 
-      <!-- Nav center: the links 
-           On portrait: row 2 
-           On landscape: row 1, to the right of the logo, left of the Download button -->
+      <!-- Center: the links -->
       <div class="nav-center">
         <div class="nav-links">
           <a href="#home">Home</a>
@@ -449,7 +438,7 @@
       <p>If you do not agree to this policy, please discontinue using TallyFit immediately.</p>
     </section>
 
-    <!-- Support -->
+    <!-- SUPPORT -->
     <section id="support">
       <h2>Support</h2>
       <h3>Need Help with TallyFit?</h3>
@@ -477,7 +466,7 @@
         <ul>
           <li>Open iPhone Settings</li>
           <li>Tap your Apple ID</li>
-          <li>Select Subscriptions</li>
+          <li>Tap Subscriptions</li>
           <li>Find TallyFit to manage or cancel</li>
         </ul>
       </div>
@@ -507,7 +496,7 @@
       <p>Contact us for inquiries on account issues, subscription management, AI feedback, sync problems, feature requests, or bug reports.</p>
     </section>
 
-    <!-- Terms -->
+    <!-- TERMS -->
     <section id="terms">
       <h2>Terms of Use</h2>
       <p><strong>Effective Date:</strong> October 27, 2024</p>
@@ -592,15 +581,13 @@
     toggleSizeBtn.addEventListener("click", function() {
       isMaximized = !isMaximized;
       if (isMaximized) {
-        // Use .maximized => 100vh tall, object-fit: contain, etc.
         videoHero.classList.add("maximized");
         promoVideo.muted = false;
-        toggleSizeBtn.textContent = "x";
+        toggleSizeBtn.textContent = "+";
       } else {
-        // Return to minimized
         videoHero.classList.remove("maximized");
         promoVideo.muted = true;
-        toggleSizeBtn.textContent = "+";
+        toggleSizeBtn.textContent = "×";
       }
     });
   </script>
