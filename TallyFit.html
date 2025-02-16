@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <!-- Apple Smart App Banner (Optional) -->
   <meta name="apple-itunes-app" content="app-id=6737364770" />
-  <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="description" content="TallyFit – Your modern fitness companion. Watch our promo video, learn more about our app, and read our policies."/>
   <title>TallyFit – Modern Fitness App</title>
   <style>
@@ -66,9 +66,9 @@
       }
     }
 
-    /*********************************
+    /********************************
      NAVIGATION BAR
-    **********************************/
+    *********************************/
     header {
       position: fixed;
       top: 0; left: 0;
@@ -81,21 +81,18 @@
       max-width: var(--max-width);
       margin: 0 auto;
       display: flex;
-      flex-wrap: nowrap; /* single row on large screens */
+      flex-wrap: wrap; /* Default: multi-row in portrait */
       align-items: center;
-      justify-content: space-between;
       padding: 0 1rem;
       min-height: var(--navbar-height);
+      gap: 0.5rem;
     }
-
-    /* We'll create 3 sections, but rearrange them on mobile. */
+    /* We'll create 3 sections: left (logo+name), center (links), right (download). We'll reorder them for mobile portrait vs. landscape. */
     .nav-left, .nav-right, .nav-center {
       display: flex;
       align-items: center;
       gap: 1rem;
     }
-
-    /* Square icon with slightly rounded corners */
     .nav-icon {
       height: 34px;
       width: 34px;
@@ -106,8 +103,6 @@
       font-weight: 600;
       font-size: 1.1rem;
     }
-
-    /* The nav links themselves */
     .nav-links {
       display: flex;
       gap: 1.25rem;
@@ -115,8 +110,6 @@
     .nav-links a {
       font-size: 1rem;
     }
-
-    /* The Download button */
     .appstore-btn {
       display: inline-block;
       padding: 0.5rem 1rem;
@@ -132,9 +125,48 @@
       transform: translateY(-2px);
     }
 
-    /*********************************
+    /* Default (portrait) layout: 2 rows
+       Row 1: nav-left (logo+title) + nav-right (download)
+       Row 2: nav-center (links) */
+    .nav-left {
+      order: 1;
+      flex: 0 0 auto; /* left side */
+    }
+    .nav-right {
+      order: 2;
+      margin-left: auto; /* push download to far right on the same row as nav-left */
+      flex: 0 0 auto;
+    }
+    .nav-center {
+      order: 3;
+      flex: 1 1 100%; /* full row */
+      justify-content: center;
+    }
+
+    /********************************
+     LANDSCAPE LAYOUT
+     Single row: left (logo+name), center+right combined 
+    *********************************/
+    @media (orientation: landscape) and (min-width: 641px) {
+      nav {
+        flex-wrap: nowrap; /* single row in landscape */
+      }
+      .nav-left {
+        order: 1;
+      }
+      .nav-center {
+        order: 2;
+        flex: 1 1 auto;
+      }
+      .nav-right {
+        order: 3;
+        margin-left: 1rem; /* slight spacing from the links */
+      }
+    }
+
+    /********************************
      MAIN CONTENT
-    **********************************/
+    *********************************/
     main {
       margin-top: var(--navbar-height);
       max-width: var(--max-width);
@@ -151,7 +183,7 @@
       scroll-margin-top: calc(var(--navbar-height) + 10px);
     }
 
-    /* Home Section Layout: left content, right phone video */
+    /* Home Section Layout */
     #home .home-container {
       display: flex;
       flex-wrap: wrap;
@@ -178,10 +210,12 @@
       position: relative;
     }
     .video-container video {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+    /* Fullscreen mode: scale by top/bottom => object-fit: contain, height:100% */
     .video-container.maximized {
       position: fixed;
       top: 0;
@@ -190,6 +224,14 @@
       height: 100vh;
       border-radius: 0;
       z-index: 9999;
+      display: flex; /* so we can center the video horizontally if it’s narrower */
+      align-items: center; 
+      justify-content: center;
+    }
+    .video-container.maximized video {
+      height: 100%;      /* Fill screen vertically */
+      width: auto;       /* Let the width scale automatically */
+      object-fit: contain; /* So the top/bottom bounds define scaling */
     }
     .toggleSizeBtn {
       position: absolute;
@@ -210,9 +252,7 @@
       transform: translateY(-2px);
     }
 
-    /*********************************
-     FOOTER
-    **********************************/
+    /* FOOTER */
     footer {
       text-align: center;
       padding: var(--spacing);
@@ -244,35 +284,8 @@
       margin-bottom: 0.5rem;
     }
 
-    /*********************************
-     MOBILE PORTRAIT MEDIA QUERY
-     - Two rows: 
-       Row 1: Left (logo + name), Right (Download)
-       Row 2: center nav links
-    **********************************/
+    /* Additional Mobile adjustments */
     @media (max-width: 640px) {
-      nav {
-        flex-wrap: wrap; /* allow multiple lines */
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-      }
-      .nav-left {
-        order: 1;
-        flex: 1 1 auto;
-      }
-      .nav-right {
-        order: 2;
-        flex: 0 0 auto;
-        margin-left: auto; /* move Download to the far right of row 1 */
-      }
-      .nav-center {
-        order: 3;
-        flex: 1 1 100%;
-        justify-content: center; 
-        margin-top: 0.5rem;
-      }
-
-      /* Slightly smaller text & spacing on small screens. */
       .app-name {
         font-size: 1rem;
       }
@@ -289,7 +302,6 @@
       .video-wrapper {
         width: 160px;
       }
-
       main {
         margin-top: calc(var(--navbar-height) + 10px);
       }
@@ -315,14 +327,17 @@
         <span class="app-name">TallyFit</span>
       </div>
 
-      <!-- Right: Download Button -->
+      <!-- Nav right: in portrait, the Download button is on row 1, links on row 2. 
+           In landscape, all appear in a single row. -->
       <div class="nav-right">
         <a class="appstore-btn" href="https://apps.apple.com/us/app/tallyfit/id6737364770" target="_blank">
           Download
         </a>
       </div>
 
-      <!-- Second row on mobile: Nav links centered -->
+      <!-- Nav center: the links 
+           On portrait: row 2 
+           On landscape: row 1, to the right of the logo, left of the Download button -->
       <div class="nav-center">
         <div class="nav-links">
           <a href="#home">Home</a>
@@ -348,8 +363,9 @@
           >
           <h1>Welcome to TallyFit</h1>
           <p>
-            TallyFit is your modern fitness companion – syncing workouts across devices, offering personalized AI workout routines,
-            and helping you stay on track. Watch our promo video to see what makes TallyFit unique!
+            TallyFit is your modern fitness companion – syncing workouts across devices, 
+            offering personalized AI workout routines, and helping you stay on track. 
+            Watch our promo video to see what makes TallyFit unique!
           </p>
           <p>
             Whether you're a beginner or a seasoned athlete, TallyFit is designed to adapt to your fitness needs.
@@ -369,7 +385,7 @@
       </div>
     </section>
 
-    <!-- Privacy -->
+    <!-- Privacy Policy -->
     <section id="privacy">
       <h2>Privacy Policy</h2>
       <p><strong>Effective Date:</strong> October 27, 2024</p>
@@ -567,7 +583,7 @@
   </footer>
 
   <script>
-    // Video toggle logic
+    // Fullscreen Video Toggle
     const videoHero = document.getElementById("videoHero");
     const promoVideo = document.getElementById("promoVideo");
     const toggleSizeBtn = document.getElementById("toggleSizeBtn");
@@ -576,10 +592,12 @@
     toggleSizeBtn.addEventListener("click", function() {
       isMaximized = !isMaximized;
       if (isMaximized) {
+        // Use .maximized => 100vh tall, object-fit: contain, etc.
         videoHero.classList.add("maximized");
         promoVideo.muted = false;
         toggleSizeBtn.textContent = "+";
       } else {
+        // Return to minimized
         videoHero.classList.remove("maximized");
         promoVideo.muted = true;
         toggleSizeBtn.textContent = "×";
