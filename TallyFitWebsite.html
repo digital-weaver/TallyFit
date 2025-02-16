@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <!-- Apple Smart App Banner: Replace 6737364770 with your real App Store ID if needed -->
+  <!-- Apple Smart App Banner: Replace with your real App Store ID if needed -->
   <meta name="apple-itunes-app" content="app-id=6737364770" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="description" content="TallyFit – Your modern fitness companion. Watch our promo video, learn more about our app, and read our policies."/>
   <title>TallyFit – Modern Fitness App</title>
@@ -86,7 +85,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 1rem;
-      flex-wrap: wrap; /* So nav items can wrap on smaller screens */
+      flex-wrap: wrap;
     }
     .left-nav {
       display: flex;
@@ -101,7 +100,7 @@
     .nav-links {
       display: flex;
       gap: 1.5rem;
-      flex-wrap: wrap; /* wrap nav items if needed */
+      flex-wrap: wrap;
     }
     .nav-links a {
       white-space: nowrap;
@@ -123,7 +122,7 @@
 
     /* Main Container */
     main {
-      margin-top: 30vh; /* less space up top */
+      margin-top: 30vh; /* space for navbar + banner */
       max-width: var(--max-width);
       margin: 0 auto;
       padding: var(--spacing);
@@ -136,37 +135,48 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       scroll-margin-top: calc(var(--navbar-height) + 20px);
-      position: relative; /* so we can absolutely-position stuff inside if needed */
     }
 
-    /* Home Section 
-       We'll position the minimized video top-right inside #home. */
-    #home {
-      text-align: center;
+    /* Home Section with Flex layout:
+       - One side for text & icon
+       - One side for the minimized video
+       So there's no overlap. */
+    #home .home-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .home-content {
+      flex: 1 1 300px; /* grows/shrinks but min 300px */
+      text-align: center; 
+      margin: 0 auto;
     }
 
-    /* Video Container pinned top-right (on large screens).
-       We'll tweak it in a media query for smaller screens if needed. */
+    /* Video Container (right side in the flex) */
+    .video-wrapper {
+      width: 200px; /* slightly bigger by default */
+      position: relative; 
+      /* Could add margin if needed */
+      margin: 0 auto;
+    }
     .video-container {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 180px;
+      width: 100%;
       height: auto;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
       transition: all var(--transition-speed) ease;
       background: black; /* fallback background */
-      z-index: 10; /* in front of section content */
+      position: relative;
     }
     .video-container video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
-    /* "Maximized" overrides: fill entire screen, over everything else. */
+    /* "maximized" overrides */
     .video-container.maximized {
       position: fixed;
       top: 0; 
@@ -177,7 +187,6 @@
       z-index: 9999;
     }
 
-    /* Single button to toggle min/max */
     .toggleSizeBtn {
       position: absolute;
       bottom: 1rem;
@@ -197,7 +206,7 @@
       transform: translateY(-2px);
     }
 
-    /* Responsive adjustments for smaller screens */
+    /* Responsive adjustments */
     @media (max-width: 640px) {
       :root {
         --spacing: 1rem;
@@ -206,7 +215,7 @@
         flex-direction: column;
         justify-content: center;
         padding: 0.5rem;
-        height: auto; /* let nav expand to fit content */
+        height: auto;
       }
       .left-nav {
         margin-bottom: 0.5rem;
@@ -216,11 +225,6 @@
       }
       main {
         margin-top: 35vh;
-      }
-      .video-container {
-        top: 0.5rem;
-        right: 0.5rem;
-        width: 140px;
       }
     }
 
@@ -280,7 +284,6 @@
         <a href="#support">Support</a>
         <a href="#terms">Terms</a>
       </div>
-      <!-- Optional CTA button in nav if you want -->
       <a class="appstore-btn" href="https://apps.apple.com/us/app/tallyfit/id6737364770" target="_blank">
         Download on the App Store
       </a>
@@ -290,31 +293,35 @@
   <main>
     <!-- HOME Section -->
     <section id="home">
-      <!-- Minimizable video container pinned top-right -->
-      <div id="videoHero" class="video-container">
-        <video id="promoVideo" autoplay loop playsinline muted>
-          <source src="886x1920 TFVideo.mov" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <button id="toggleSizeBtn" class="toggleSizeBtn">×</button>
-      </div>
+      <div class="home-container">
+        <!-- Left side: content -->
+        <div class="home-content">
+          <img 
+            src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg"
+            alt="TallyFit App Icon"
+            style="width:120px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 1rem;"
+          >
+          <h1>Welcome to TallyFit</h1>
+          <p>
+            TallyFit is your modern fitness companion – syncing workouts across devices, offering personalized AI workout routines,
+            and helping you stay on track. Watch our promo video to see what makes TallyFit unique!
+          </p>
+          <p>
+            Whether you're a beginner or a seasoned athlete, TallyFit is designed to adapt to your fitness needs.
+          </p>
+        </div>
 
-      <!-- Centered icon & title -->
-      <img 
-        src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg"
-        alt="TallyFit App Icon"
-        style="width:120px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 1rem; margin-bottom: 1rem;"
-      >
-      <h1>Welcome to TallyFit</h1>
-      <p>
-        TallyFit is your modern fitness companion – syncing workouts across devices, offering personalized AI workout routines,
-        and helping you stay on track. Watch our promo video to see what makes TallyFit unique!
-      </p>
-      <p>
-        Whether you're a beginner or a seasoned athlete, TallyFit is designed to adapt to your fitness needs.
-      </p>
-      <!-- Removed the big "Get TallyFit on the App Store" button 
-           in favor of the Apple Smart App Banner and the existing nav link -->
+        <!-- Right side: minimized video -->
+        <div class="video-wrapper">
+          <div id="videoHero" class="video-container">
+            <video id="promoVideo" autoplay loop playsinline muted>
+              <source src="886x1920 TFVideo.mov" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <button id="toggleSizeBtn" class="toggleSizeBtn">×</button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- PRIVACY Section -->
@@ -528,14 +535,12 @@
         videoHero.classList.add("maximized");
         // Unmute
         promoVideo.muted = false;
-        // Switch icon to plus or close
         toggleSizeBtn.textContent = "+";
       } else {
-        // Minimize the video
+        // Return to minimized size
         videoHero.classList.remove("maximized");
         // Mute
         promoVideo.muted = true;
-        // Switch icon
         toggleSizeBtn.textContent = "×";
       }
     });
