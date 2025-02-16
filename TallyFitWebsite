@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TallyFit – Your modern fitness companion. Watch our promo, learn more about our app, and read our policies.">
+  <title>TallyFit – Modern Fitness App</title>
+  <style>
+    /* CSS Variables & Base Styles */
+    :root {
+      --primary: #7f00ff;
+      --secondary: #00b4db;
+      --text-primary: #2d3748;
+      --text-secondary: #4a5568;
+      --background: #f7fafc;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --radius: 15px;
+      --max-width: 900px;
+      --spacing: 2rem;
+      --transition-speed: 1s;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-primary: #f7fafc;
+        --text-secondary: #e2e8f0;
+        --background: #1a202c;
+        --card-bg: #2d3748;
+      }
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--background);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: var(--secondary);
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    a:hover {
+      color: var(--primary);
+    }
+    
+    /* Navigation Bar */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      z-index: 1100;
+    }
+    nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem var(--spacing);
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .appstore-btn {
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: #fff;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: transform var(--transition-speed);
+      box-shadow: var(--shadow);
+    }
+    .appstore-btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    /* Video Hero & Animation */
+    .video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 1000;
+      transition: all var(--transition-speed) ease;
+    }
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* When minimized, the video shrinks into a corner */
+    .video-container.minimized {
+      width: 320px;
+      height: 180px;
+      top: 1rem;
+      right: 1rem;
+      left: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    
+    /* Main Content Container */
+    main {
+      margin-top: calc(100vh + 1rem);
+      max-width: var(--max-width);
+      margin-left: auto;
+      margin-right: auto;
+      padding: var(--spacing);
+    }
+    section {
+      margin-bottom: 3rem;
+      background: var(--card-bg);
+      padding: var(--spacing);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    h1, h2 {
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    h2 {
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
+    p, li {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 640px) {
+      :root {
+        --spacing: 1rem;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .video-container.minimized {
+        width: 280px;
+        height: 157px;
+      }
+      nav {
+        flex-direction: column;
+      }
+      .nav-links {
+        margin-top: 0.5rem;
+      }
+      main {
+        margin-top: calc(100vh + 0.5rem);
+      }
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: var(--spacing);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <header>
+    <nav>
+      <div class="logo">
+        <!-- You can replace this with your logo image if desired -->
+        <strong>TallyFit</strong>
+      </div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#support">Support</a>
+        <a href="#terms">Terms</a>
+      </div>
+      <a class="appstore-btn" href="https://apps.apple.com/us/app/tallyfit/id6737364770" target="_blank">
+        Download on the App Store
+      </a>
+    </nav>
+  </header>
+  
+  <!-- Fullscreen Video Hero -->
+  <div id="video-hero" class="video-container">
+    <video autoplay muted playsinline>
+      <source src="886x1920 TFVideo.mov" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  
+  <!-- Main Content -->
+  <main>
+    <!-- Home Section -->
+    <section id="home">
+      <h1>Welcome to TallyFit</h1>
+      <p>
+        TallyFit is your modern fitness companion – syncing workouts across devices, offering personalized AI workout routines,
+        and helping you stay on track. Watch our promo video above to see what makes TallyFit unique!
+      </p>
+      <p>
+        Whether you're a beginner or a seasoned athlete, TallyFit is designed to adapt to your fitness needs.
+      </p>
+      <!-- You can insert promotional screenshots or additional images below -->
+      <img src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg" alt="TallyFit App Icon" style="width:120px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 1rem;">
+    </section>
+    
+    <!-- Privacy Policy Section -->
+    <section id="privacy">
+      <h2>Privacy Policy</h2>
+      <p>Effective Date: October 27, 2024</p>
+      <h3>1. Introduction</h3>
+      <p>TallyFit respects your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our app.</p>
+      <h3>2. Information We Collect</h3>
+      <p>We collect the following types of information:</p>
+      <ul>
+        <li><strong>Contact Information:</strong> Email address for account creation and communication</li>
+        <li><strong>Account Identifiers:</strong> User ID and Device ID for app functionality</li>
+        <li><strong>Technical Data:</strong> Crash reports and diagnostic information</li>
+        <li><strong>Workout Data:</strong> Your custom workouts, exercise preferences, and routines</li>
+        <li><strong>AI Interaction Data:</strong> Your conversations with Tally, our AI assistant</li>
+      </ul>
+      <h3>3. How We Use Your Information</h3>
+      <p>We use your information for:</p>
+      <ul>
+        <li>Providing and improving our services</li>
+        <li>Syncing your workouts across devices via Firebase</li>
+        <li>Training and improving our AI assistant</li>
+        <li>Analyzing app performance and fixing issues</li>
+        <li>Communicating important updates</li>
+      </ul>
+      <h3>4. Data Storage and Security</h3>
+      <p>Your data is stored securely using industry-standard encryption. We use Firebase for authentication and data storage, ensuring your information is protected according to Google's security standards. However, no method of data transmission or storage can be guaranteed to be 100% secure. You acknowledge that you use TallyFit at your own risk.</p>
+      <h3>5. AI Features and Data Processing</h3>
+      <p>Our AI assistant, Tally, processes your workout preferences and conversations to provide personalized recommendations. This data is:</p>
+      <ul>
+        <li>Used to improve AI responses and workout suggestions</li>
+        <li>Processed in accordance with privacy best practices</li>
+        <li>Never shared with third parties for marketing purposes</li>
+      </ul>
+      <p>We reserve the right to limit, modify, or disable the AI assistant at any time without prior notice.</p>
+      <h3>6. Data Not Linked to You</h3>
+      <p>The following data is collected but not linked to your identity:</p>
+      <ul>
+        <li>Diagnostic information</li>
+        <li>App usage statistics</li>
+        <li>Crash reports</li>
+      </ul>
+      <h3>7. Data Retention</h3>
+      <p>We retain your data for as long as your account is active. You can request data deletion by contacting us.</p>
+      <h3>8. Your Rights</h3>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access your personal data</li>
+        <li>Correct inaccurate data</li>
+        <li>Request data deletion</li>
+        <li>Export your data</li>
+      </ul>
+      <h3>9. Changes to This Policy</h3>
+      <p>We may update this privacy policy periodically. We will notify you of any significant changes through the app.</p>
+      <h3>10. Contact Us</h3>
+      <p>For privacy-related questions, contact us at: <a href="mailto:magenta.sewing.04@icloud.com">magenta.sewing.04@icloud.com</a></p>
+      <h3>11. Disclaimer and Limitation of Liability</h3>
+      <p>
+        By using TallyFit, you agree that your use is at your sole risk. We make no warranties or representations regarding the accuracy of data,
+        including AI-generated suggestions. TallyFit is provided “as is” and without guarantees of uninterrupted operation. To the fullest extent permitted by law,
+        we disclaim liability for any damages arising from your use.
+      </p>
+      <p>If you do not agree to this policy, please discontinue using TallyFit immediately.</p>
+    </section>
+    
+    <!-- Support Section -->
+    <section id="support">
+      <h2>Support</h2>
+      <h3>Need Help with TallyFit?</h3>
+      <p>We're here to help you make the most of your fitness journey with TallyFit!</p>
+      <div style="border-left: 4px solid var(--primary); padding-left: 1rem; margin: 1.5rem 0;">
+        <h3>Quick Support</h3>
+        <p>Email us at: <a href="mailto:magenta.sewing.04@icloud.com">magenta.sewing.04@icloud.com</a></p>
+        <p>We aim to respond within 48 hours; however, response times are estimates and delays may occur.</p>
+      </div>
+      <h3>Frequently Asked Questions</h3>
+      <div style="margin-bottom: 1.5rem;">
+        <p style="font-weight:600; color: var(--primary);">How do I create an account?</p>
+        <p>Tap the Profile tab and select "Create Account". Enter your email and follow the verification steps. Your workouts will automatically sync across devices when signed in.</p>
+      </div>
+      <div style="margin-bottom: 1.5rem;">
+        <p style="font-weight:600; color: var(--primary);">How does Tally (AI Assistant) work?</p>
+        <p>Tally is your AI workout partner that helps create personalized routines, exercises, stretches, and yoga sessions. Tell Tally your goals and preferences to get tailored suggestions – always verify for accuracy.</p>
+      </div>
+      <div style="margin-bottom: 1.5rem;">
+        <p style="font-weight:600; color: var(--primary);">How do I manage my subscription?</p>
+        <p>You can manage your subscription through your Apple ID settings:</p>
+        <ul>
+          <li>Open iPhone Settings</li>
+          <li>Tap your Apple ID</li>
+          <li>Select Subscriptions</li>
+          <li>Find TallyFit to manage or cancel</li>
+        </ul>
+      </div>
+      <div style="margin-bottom: 1.5rem;">
+        <p style="font-weight:600; color: var(--primary);">How do I sync my workouts across devices?</p>
+        <p>Once signed in, your workouts sync automatically when connected to the internet. You can create and track workouts offline and they’ll sync once you’re back online.</p>
+      </div>
+      <div style="margin-bottom: 1.5rem;">
+        <p style="font-weight:600; color: var(--primary);">What if Tally gives me inappropriate or incorrect suggestions?</p>
+        <p>Review all suggestions for personal suitability. Start with lower intensity, stop if something feels wrong, and report any unsafe suggestions to support.</p>
+      </div>
+      <div style="margin-bottom: 1.5rem;">
+        <p style="font-weight:600; color: var(--primary);">How do I export or delete my data?</p>
+        <p>To export your data or request deletion, email us with your account email. We aim to process requests within 48 hours, though delays may occur.</p>
+      </div>
+      <h3>Important Disclaimer</h3>
+      <p>
+        TallyFit and its AI assistant are provided on an “as is” basis. We make no guarantees about the accuracy, reliability, or completeness of the information.
+        You agree to use TallyFit at your own risk. Always consult a professional for personalized medical or fitness advice.
+      </p>
+      <h3>Still Need Help?</h3>
+      <p>Contact us for inquiries about account issues, subscription management, AI assistant feedback, sync problems, feature requests, or bug reports.</p>
+    </section>
+    
+    <!-- Terms of Use Section -->
+    <section id="terms">
+      <h2>Terms of Use</h2>
+      <p>Effective Date: October 27, 2024</p>
+      <h3>1. Acceptance of Terms</h3>
+      <p>By downloading, installing, or using TallyFit, you agree to these Terms of Use and our Privacy Policy. If you disagree with any part, please do not use the app.</p>
+      <h3>2. Account Creation and Security</h3>
+      <p>To use TallyFit’s sync and AI features, you must create an account. You agree to provide accurate information, keep your credentials secure, and notify us of any unauthorized access.</p>
+      <h3>3. Subscription Terms</h3>
+      <p>TallyFit offers the following auto-renewing subscriptions:</p>
+      <ul>
+        <li>Monthly Subscription: $7.99/month with 3-day free trial</li>
+        <li>Annual Subscription: $59.99/year with 7-day free trial</li>
+      </ul>
+      <p>Subscription terms include:</p>
+      <ul>
+        <li>Payment charged to your Apple ID at purchase confirmation</li>
+        <li>Auto-renewal unless turned off at least 24 hours before the period ends</li>
+        <li>Renewal charge within 24 hours before the current period ends</li>
+        <li>Manage subscriptions via App Store settings</li>
+        <li>Unused free trial portion forfeited on subscription purchase</li>
+      </ul>
+      <h3>4. AI Assistant (Tally)</h3>
+      <p>Our AI assistant provides personalized workout recommendations. You acknowledge that AI-generated content is experimental, may be inaccurate, and should be evaluated for your safety.</p>
+      <ul>
+        <li>AI responses are not professional medical or fitness advice</li>
+        <li>You consent to your interactions being used to improve the AI service</li>
+      </ul>
+      <h3>5. Data Sync and Storage</h3>
+      <p>TallyFit synchronizes data across devices using secure cloud servers (Firebase). An internet connection is required for syncing. Local backups are recommended.</p>
+      <h3>6. Health and Safety</h3>
+      <p>Consult healthcare providers before starting any exercise program. Exercise within your limits and stop if you experience pain. The app is not a substitute for professional advice.</p>
+      <h3>7. User Content</h3>
+      <p>You retain ownership of your custom workouts and routines. By using TallyFit, you grant us a license to store and display your content. We may remove harmful or inappropriate content.</p>
+      <h3>8. Limitation of Liability</h3>
+      <p>TallyFit, its creators, affiliates, and employees are not liable for any damages arising from your use of the app or AI assistant. Use TallyFit at your own risk.</p>
+      <h3>9. Privacy and Data Protection</h3>
+      <p>We protect your data as described in our <a href="#privacy">Privacy Policy</a>. While we strive for security, we cannot guarantee absolute protection.</p>
+      <h3>10. Changes to Terms</h3>
+      <p>We may update these terms. Continued use after changes indicates your acceptance. Major changes will be notified in-app.</p>
+      <h3>11. Contact</h3>
+      <p>Questions? Contact us at: <a href="mailto:magenta.sewing.04@icloud.com">magenta.sewing.04@icloud.com</a></p>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer>
+    <p>© 2024 digital-weaver. All rights reserved.</p>
+  </footer>
+  
+  <!-- JavaScript for Video Animation -->
+  <script>
+    // After 5 seconds, add the "minimized" class to the video container to trigger the CSS transition.
+    window.addEventListener("load", function() {
+      setTimeout(function() {
+        document.getElementById("video-hero").classList.add("minimized");
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
