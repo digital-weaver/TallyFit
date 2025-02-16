@@ -4,8 +4,7 @@
   <meta charset="UTF-8"/>
   <!-- Apple Smart App Banner (Optional) -->
   <meta name="apple-itunes-app" content="app-id=6737364770" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0"/>
   <meta name="description" content="TallyFit – Your modern fitness companion. Watch our promo video, learn more about our app, and read our policies."/>
   <title>TallyFit – Modern Fitness App</title>
   <style>
@@ -48,13 +47,13 @@
       color: var(--secondary);
       transition: color 0.2s;
       font-weight: 500;
-      white-space: nowrap; /* Don’t wrap nav text */
+      white-space: nowrap;
     }
     a:hover {
       color: var(--primary);
     }
 
-    /* Light/Dark Logos in the Nav */
+    /* Light vs. Dark Logo */
     .logo-img-dark {
       display: none;
     }
@@ -68,42 +67,32 @@
     }
 
     /*********************************
-     NAVIGATION BAR (Single row, no wrap)
+     NAVIGATION BAR
     **********************************/
     header {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
-      height: var(--navbar-height);
       background: var(--card-bg);
       box-shadow: var(--shadow);
       z-index: 1000;
-      overflow-x: auto; /* If nav is too wide for portrait, scroll horizontally */
     }
     nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
       display: flex;
+      flex-wrap: nowrap; /* single row on large screens */
       align-items: center;
       justify-content: space-between;
-      height: 100%;
-      min-width: 600px; /* Enough room for nav items + button */
       padding: 0 1rem;
+      min-height: var(--navbar-height);
     }
-    .nav-left,
-    .nav-center,
-    .nav-right {
+
+    /* We'll create 3 sections, but rearrange them on mobile. */
+    .nav-left, .nav-right, .nav-center {
       display: flex;
       align-items: center;
       gap: 1rem;
-    }
-    .nav-left {
-      flex: 0 0 auto;
-    }
-    .nav-center {
-      flex: 1 1 auto; 
-      justify-content: center;
-    }
-    .nav-right {
-      flex: 0 0 auto;
     }
 
     /* Square icon with slightly rounded corners */
@@ -117,6 +106,8 @@
       font-weight: 600;
       font-size: 1.1rem;
     }
+
+    /* The nav links themselves */
     .nav-links {
       display: flex;
       gap: 1.25rem;
@@ -125,6 +116,7 @@
       font-size: 1rem;
     }
 
+    /* The Download button */
     .appstore-btn {
       display: inline-block;
       padding: 0.5rem 1rem;
@@ -169,7 +161,7 @@
     }
     .home-content {
       flex: 1 1 300px;
-      text-align: center; 
+      text-align: center;
     }
     .video-wrapper {
       width: 200px; 
@@ -253,9 +245,34 @@
     }
 
     /*********************************
-     MOBILE ADJUSTMENTS
+     MOBILE PORTRAIT MEDIA QUERY
+     - Two rows: 
+       Row 1: Left (logo + name), Right (Download)
+       Row 2: center nav links
     **********************************/
-    @media (max-width: 480px) {
+    @media (max-width: 640px) {
+      nav {
+        flex-wrap: wrap; /* allow multiple lines */
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+      }
+      .nav-left {
+        order: 1;
+        flex: 1 1 auto;
+      }
+      .nav-right {
+        order: 2;
+        flex: 0 0 auto;
+        margin-left: auto; /* move Download to the far right of row 1 */
+      }
+      .nav-center {
+        order: 3;
+        flex: 1 1 100%;
+        justify-content: center; 
+        margin-top: 0.5rem;
+      }
+
+      /* Slightly smaller text & spacing on small screens. */
       .app-name {
         font-size: 1rem;
       }
@@ -271,6 +288,10 @@
       }
       .video-wrapper {
         width: 160px;
+      }
+
+      main {
+        margin-top: calc(var(--navbar-height) + 10px);
       }
     }
   </style>
@@ -294,7 +315,14 @@
         <span class="app-name">TallyFit</span>
       </div>
 
-      <!-- Center: Nav links -->
+      <!-- Right: Download Button -->
+      <div class="nav-right">
+        <a class="appstore-btn" href="https://apps.apple.com/us/app/tallyfit/id6737364770" target="_blank">
+          Download
+        </a>
+      </div>
+
+      <!-- Second row on mobile: Nav links centered -->
       <div class="nav-center">
         <div class="nav-links">
           <a href="#home">Home</a>
@@ -302,13 +330,6 @@
           <a href="#support">Support</a>
           <a href="#terms">Terms</a>
         </div>
-      </div>
-
-      <!-- Right: Download Button -->
-      <div class="nav-right">
-        <a class="appstore-btn" href="https://apps.apple.com/us/app/tallyfit/id6737364770" target="_blank">
-          Download
-        </a>
       </div>
     </nav>
   </header>
@@ -348,7 +369,7 @@
       </div>
     </section>
 
-    <!-- Privacy Policy -->
+    <!-- Privacy -->
     <section id="privacy">
       <h2>Privacy Policy</h2>
       <p><strong>Effective Date:</strong> October 27, 2024</p>
