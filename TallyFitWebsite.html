@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="TallyFit – Your modern fitness companion. Watch our promo video, learn more about our app, and read our policies."/>
   <title>TallyFit – Modern Fitness App</title>
@@ -51,7 +51,7 @@
       color: var(--primary);
     }
 
-    /* Toggleable light/dark logos */
+    /* Light/Dark Logos in the Nav */
     .logo-img-dark {
       display: none;
     }
@@ -90,6 +90,11 @@
       gap: 0.5rem;
       font-weight: bold;
     }
+    /* Make the nav icon rounded */
+    .left-nav img {
+      height: 30px;
+      border-radius: 50%;
+    }
     .nav-links {
       display: flex;
       gap: 1.5rem;
@@ -103,50 +108,48 @@
       font-weight: 600;
       transition: transform var(--transition-speed);
       box-shadow: var(--shadow);
+      white-space: nowrap;
     }
     .appstore-btn:hover {
       transform: translateY(-2px);
     }
 
-    /* Video Hero Container */
+    /* Video Container 
+       Now will be placed in the home section instead of the entire page.
+       We STILL want it to fill the screen when "maximized," so we'll handle that with position fixed. */
     .video-container {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
-      z-index: 1000;
-      width: 100vw;
-      height: 100vh;
+      width: 180px;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
       transition: all var(--transition-speed) ease;
-      background: black; /* behind the video in case aspect ratio differs */
+      background: black; /* fallback background */
     }
     .video-container video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    /* Minimized state: smaller, pinned in the corner */
-    .video-container.minimized {
-      width: 180px;
-      height: auto; 
-      top: var(--spacing);
-      right: var(--spacing);
-      left: auto;
-      bottom: auto;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+    /* "Maximized" overrides: fill entire screen, over everything else. */
+    .video-container.maximized {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      z-index: 9999;
     }
 
-    /* Video control buttons */
-    .controls {
+    /* Single button to toggle min/max */
+    .toggleSizeBtn {
       position: absolute;
       bottom: 1rem;
       right: 1rem;
-      z-index: 9999;
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .control-btn {
       padding: 0.5rem 1rem;
       background: linear-gradient(135deg, var(--secondary), var(--primary));
       color: #fff;
@@ -158,21 +161,32 @@
       box-shadow: var(--shadow);
       transition: transform 0.2s;
     }
-    .control-btn:hover {
+    .toggleSizeBtn:hover {
       transform: translateY(-2px);
+    }
+
+    /* Home Section Container 
+       We'll make this position: relative so we can absolutely-position the minimized video within it. */
+    #home {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* center icon & text */
+      text-align: center;
+    }
+    /* Add padding on the right so video doesn't collide with section edges */
+    #home {
+      padding-right: 220px; /* enough space for 180px video + 40 px gap */
     }
 
     /* Main Container */
     main {
-      /* Less space so the Home content starts higher */
-      margin-top: 30vh;
+      margin-top: 30vh; /* less space up top */
       max-width: var(--max-width);
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
       padding: var(--spacing);
     }
 
-    /* Prevent section headers from being hidden behind nav */
     section {
       margin-bottom: 3rem;
       background: var(--card-bg);
@@ -180,6 +194,27 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       scroll-margin-top: calc(var(--navbar-height) + 20px);
+    }
+
+    /* Big CTA for the App Store */
+    .big-appstore-link {
+      display: block;
+      width: 90%;
+      max-width: 400px;
+      margin: 2rem auto 0 auto;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: #fff;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+    .big-appstore-link:hover {
+      transform: translateY(-2px);
     }
 
     h1, h2, h3 {
@@ -205,7 +240,7 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Responsive adjustments */
+    /* Responsive adjustments for smaller screens */
     @media (max-width: 640px) {
       :root {
         --spacing: 1rem;
@@ -213,22 +248,26 @@
       nav {
         flex-direction: column;
         justify-content: center;
+        padding: 0.5rem;
+      }
+      .left-nav {
+        margin-bottom: 0.5rem;
       }
       .nav-links {
-        margin-top: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
       }
       main {
-        margin-top: 40vh;
+        margin-top: 35vh;
       }
-      .video-container.minimized {
-        width: 140px;
+      #home {
+        padding-right: 0;
       }
-      h1 {
-        font-size: 2rem;
+      .video-container {
+        right: 0.5rem;
       }
     }
 
-    /* Footer */
     footer {
       text-align: center;
       padding: var(--spacing);
@@ -245,15 +284,13 @@
         <!-- Light Mode Logo -->
         <img 
           src="362D852E-7DF7-476C-B398-D5C67B0E4782.jpg" 
-          alt="TallyFit Logo Light" 
-          style="height:30px;" 
+          alt="TallyFit Light Logo" 
           class="logo-img-light"
         >
         <!-- Dark Mode Logo -->
         <img 
           src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg" 
-          alt="TallyFit Logo Dark" 
-          style="height:30px;" 
+          alt="TallyFit Dark Logo" 
           class="logo-img-dark"
         >
         <span>TallyFit</span>
@@ -270,36 +307,37 @@
     </nav>
   </header>
 
-  <!-- Video Hero -->
-  <div id="video-hero" class="video-container">
-    <video id="promoVideo" autoplay muted loop playsinline>
-      <source src="886x1920 TFVideo.mov" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-    <!-- Video Control Buttons -->
-    <div class="controls">
-      <button id="muteBtn" class="control-btn">Unmute</button>
-      <!-- Single button to toggle min/max via icons -->
-      <button id="toggleSizeBtn" class="control-btn">×</button>
-    </div>
-  </div>
-
-  <!-- Main Content -->
   <main>
     <!-- HOME Section -->
     <section id="home">
+      <!-- Minimizable video container inside the Home section, pinned to top-right -->
+      <div id="videoHero" class="video-container">
+        <video id="promoVideo" autoplay loop playsinline muted>
+          <source src="886x1920 TFVideo.mov" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <button id="toggleSizeBtn" class="toggleSizeBtn">×</button>
+      </div>
+
+      <!-- Centered icon & title -->
       <img 
         src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg"
         alt="TallyFit App Icon"
-        style="width:120px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 1rem;">
+        style="width:120px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 1rem; margin-bottom: 1rem;"
+      >
       <h1>Welcome to TallyFit</h1>
       <p>
         TallyFit is your modern fitness companion – syncing workouts across devices, offering personalized AI workout routines,
-        and helping you stay on track. Watch our promo video above to see what makes TallyFit unique!
+        and helping you stay on track. Watch our promo video to see what makes TallyFit unique!
       </p>
       <p>
         Whether you're a beginner or a seasoned athlete, TallyFit is designed to adapt to your fitness needs.
       </p>
+
+      <!-- Large CTA for the app store -->
+      <a class="big-appstore-link" href="https://apps.apple.com/us/app/tallyfit/id6737364770" target="_blank">
+        Get TallyFit on the App Store
+      </a>
     </section>
 
     <!-- PRIVACY Section -->
@@ -500,42 +538,39 @@
   </footer>
 
   <script>
-    /* After 5 seconds, auto-minimize the video */
-    window.addEventListener("load", function() {
-      setTimeout(function() {
-        document.getElementById("video-hero").classList.add("minimized");
-        toggleSizeBtn.textContent = "+";
-      }, 5000);
-    });
-
-    // Grab elements
-    const videoHero = document.getElementById("video-hero");
-    const promoVideo = document.getElementById("promoVideo");
-    const muteBtn = document.getElementById("muteBtn");
+    // References
+    const videoHero   = document.getElementById("videoHero");
+    const promoVideo  = document.getElementById("promoVideo");
     const toggleSizeBtn = document.getElementById("toggleSizeBtn");
 
-    // Mute/Unmute Toggle
-    muteBtn.addEventListener("click", function() {
-      if (promoVideo.muted) {
-        promoVideo.muted = false;
-        muteBtn.textContent = "Mute";
-      } else {
-        promoVideo.muted = true;
-        muteBtn.textContent = "Unmute";
-      }
-    });
+    // On page load, the video is minimized & muted
+    // Then after 5s, we keep it minimized (remove auto-min or keep?), user can manually maximize to unmute
+    // If you want auto-minimize, uncomment the setTimeout below.
 
-    // Min/Max Toggle
-    let isMinimized = false;
+    // window.addEventListener("load", function() {
+    //   setTimeout(function() {
+    //     // If we wanted to do something automatically:
+    //     // Here, it's already minimized in the HTML by default.
+    //   }, 5000);
+    // });
+
+    // Toggle size: minimized => maximized => minimized
+    let isMaximized = false;
     toggleSizeBtn.addEventListener("click", function() {
-      isMinimized = !isMinimized;
-      if (isMinimized) {
-        // Minimize
-        videoHero.classList.add("minimized");
+      isMaximized = !isMaximized;
+      if (isMaximized) {
+        // Maximize the video
+        videoHero.classList.add("maximized");
+        // Unmute
+        promoVideo.muted = false;
+        // Switch icon to plus or close
         toggleSizeBtn.textContent = "+";
       } else {
-        // Maximize (full screen)
-        videoHero.classList.remove("minimized");
+        // Minimize the video
+        videoHero.classList.remove("maximized");
+        // Mute
+        promoVideo.muted = true;
+        // Switch icon
         toggleSizeBtn.textContent = "×";
       }
     });
