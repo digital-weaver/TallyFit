@@ -19,7 +19,7 @@
       --max-width: 900px;
       --spacing: 2rem;
       --transition-speed: 1s;
-      --navbar-height: 70px; /* approximate height for scroll offset */
+      --navbar-height: 70px; /* approximate nav height for scroll offset */
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -39,8 +39,7 @@
       background: var(--background);
       color: var(--text-primary);
       line-height: 1.6;
-      /* Smooth scrolling for anchor links */
-      scroll-behavior: smooth;
+      scroll-behavior: smooth; /* Smooth anchor scrolling */
     }
     a {
       text-decoration: none;
@@ -50,6 +49,19 @@
     }
     a:hover {
       color: var(--primary);
+    }
+
+    /* Toggleable light/dark logos */
+    .logo-img-dark {
+      display: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      .logo-img-light {
+        display: none;
+      }
+      .logo-img-dark {
+        display: block;
+      }
     }
 
     /* Header / Navigation */
@@ -101,24 +113,25 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
       z-index: 1000;
+      width: 100vw;
+      height: 100vh;
       transition: all var(--transition-speed) ease;
+      background: black; /* behind the video in case aspect ratio differs */
     }
     .video-container video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    /* Minimized state: shrink into top-right corner, keep aspect ratio */
+    /* Minimized state: smaller, pinned in the corner */
     .video-container.minimized {
-      width: 320px;
+      width: 180px;
       height: auto; 
       top: var(--spacing);
       right: var(--spacing);
       left: auto;
+      bottom: auto;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
@@ -150,17 +163,16 @@
     }
 
     /* Main Container */
-    /* Reduce margin-top so Home section appears sooner */
     main {
-      margin-top: 40vh; /* Less space above Home */
+      /* Less space so the Home content starts higher */
+      margin-top: 30vh;
       max-width: var(--max-width);
       margin-left: auto;
       margin-right: auto;
       padding: var(--spacing);
     }
 
-    /* Ensure sections are not cut off by fixed navbar:
-       give them a top scroll-margin */
+    /* Prevent section headers from being hidden behind nav */
     section {
       margin-bottom: 3rem;
       background: var(--card-bg);
@@ -206,10 +218,10 @@
         margin-top: 0.5rem;
       }
       main {
-        margin-top: 50vh; 
+        margin-top: 40vh;
       }
       .video-container.minimized {
-        width: 280px;
+        width: 140px;
       }
       h1 {
         font-size: 2rem;
@@ -230,7 +242,20 @@
   <header>
     <nav>
       <div class="left-nav">
-        <img src="TallyFitLogo.png" alt="TallyFit Logo" style="height:30px;">
+        <!-- Light Mode Logo -->
+        <img 
+          src="362D852E-7DF7-476C-B398-D5C67B0E4782.jpg" 
+          alt="TallyFit Logo Light" 
+          style="height:30px;" 
+          class="logo-img-light"
+        >
+        <!-- Dark Mode Logo -->
+        <img 
+          src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg" 
+          alt="TallyFit Logo Dark" 
+          style="height:30px;" 
+          class="logo-img-dark"
+        >
         <span>TallyFit</span>
       </div>
       <div class="nav-links">
@@ -254,8 +279,8 @@
     <!-- Video Control Buttons -->
     <div class="controls">
       <button id="muteBtn" class="control-btn">Unmute</button>
-      <button id="pauseBtn" class="control-btn">Pause</button>
-      <button id="minBtn" class="control-btn">Minimize</button>
+      <!-- Single button to toggle min/max via icons -->
+      <button id="toggleSizeBtn" class="control-btn">×</button>
     </div>
   </div>
 
@@ -271,9 +296,10 @@
       <p>
         Whether you're a beginner or a seasoned athlete, TallyFit is designed to adapt to your fitness needs.
       </p>
-      <img src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg"
-           alt="TallyFit App Icon"
-           style="width:120px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 1rem;">
+      <img 
+        src="362D852E-7DF7-476C-B398-D5C67B0E4782 2.jpg"
+        alt="TallyFit App Icon"
+        style="width:120px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 1rem;">
     </section>
 
     <!-- PRIVACY Section -->
@@ -474,11 +500,11 @@
   </footer>
 
   <script>
-    // After 5 seconds, auto-minimize the video container
+    /* After 5 seconds, auto-minimize the video */
     window.addEventListener("load", function() {
       setTimeout(function() {
         document.getElementById("video-hero").classList.add("minimized");
-        minBtn.textContent = "Maximize";
+        toggleSizeBtn.textContent = "+";
       }, 5000);
     });
 
@@ -486,8 +512,7 @@
     const videoHero = document.getElementById("video-hero");
     const promoVideo = document.getElementById("promoVideo");
     const muteBtn = document.getElementById("muteBtn");
-    const pauseBtn = document.getElementById("pauseBtn");
-    const minBtn = document.getElementById("minBtn");
+    const toggleSizeBtn = document.getElementById("toggleSizeBtn");
 
     // Mute/Unmute Toggle
     muteBtn.addEventListener("click", function() {
@@ -500,27 +525,18 @@
       }
     });
 
-    // Pause/Play Toggle
-    pauseBtn.addEventListener("click", function() {
-      if (promoVideo.paused) {
-        promoVideo.play();
-        pauseBtn.textContent = "Pause";
-      } else {
-        promoVideo.pause();
-        pauseBtn.textContent = "Play";
-      }
-    });
-
-    // Minimize/Maximize Toggle
+    // Min/Max Toggle
     let isMinimized = false;
-    minBtn.addEventListener("click", function() {
+    toggleSizeBtn.addEventListener("click", function() {
       isMinimized = !isMinimized;
       if (isMinimized) {
+        // Minimize
         videoHero.classList.add("minimized");
-        minBtn.textContent = "Maximize";
+        toggleSizeBtn.textContent = "+";
       } else {
+        // Maximize (full screen)
         videoHero.classList.remove("minimized");
-        minBtn.textContent = "Minimize";
+        toggleSizeBtn.textContent = "×";
       }
     });
   </script>
