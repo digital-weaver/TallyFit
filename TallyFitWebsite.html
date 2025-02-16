@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Apple Smart App Banner: Replace 6737364770 with your real App Store ID if needed -->
+  <meta name="apple-itunes-app" content="app-id=6737364770" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="description" content="TallyFit – Your modern fitness companion. Watch our promo video, learn more about our app, and read our policies."/>
   <title>TallyFit – Modern Fitness App</title>
   <style>
@@ -83,6 +86,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 1rem;
+      flex-wrap: wrap; /* So nav items can wrap on smaller screens */
     }
     .left-nav {
       display: flex;
@@ -90,14 +94,17 @@
       gap: 0.5rem;
       font-weight: bold;
     }
-    /* Make the nav icon rounded */
     .left-nav img {
       height: 30px;
-      border-radius: 50%;
+      border-radius: 50%; /* round the nav icon */
     }
     .nav-links {
       display: flex;
       gap: 1.5rem;
+      flex-wrap: wrap; /* wrap nav items if needed */
+    }
+    .nav-links a {
+      white-space: nowrap;
     }
     .appstore-btn {
       display: inline-block;
@@ -114,13 +121,36 @@
       transform: translateY(-2px);
     }
 
-    /* Video Container 
-       Now will be placed in the home section instead of the entire page.
-       We STILL want it to fill the screen when "maximized," so we'll handle that with position fixed. */
+    /* Main Container */
+    main {
+      margin-top: 30vh; /* less space up top */
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--spacing);
+    }
+
+    section {
+      margin-bottom: 3rem;
+      background: var(--card-bg);
+      padding: var(--spacing);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      scroll-margin-top: calc(var(--navbar-height) + 20px);
+      position: relative; /* so we can absolutely-position stuff inside if needed */
+    }
+
+    /* Home Section 
+       We'll position the minimized video top-right inside #home. */
+    #home {
+      text-align: center;
+    }
+
+    /* Video Container pinned top-right (on large screens).
+       We'll tweak it in a media query for smaller screens if needed. */
     .video-container {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 1rem;
+      right: 1rem;
       width: 180px;
       height: auto;
       border-radius: var(--radius);
@@ -128,12 +158,14 @@
       overflow: hidden;
       transition: all var(--transition-speed) ease;
       background: black; /* fallback background */
+      z-index: 10; /* in front of section content */
     }
     .video-container video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     /* "Maximized" overrides: fill entire screen, over everything else. */
     .video-container.maximized {
       position: fixed;
@@ -165,56 +197,38 @@
       transform: translateY(-2px);
     }
 
-    /* Home Section Container 
-       We'll make this position: relative so we can absolutely-position the minimized video within it. */
-    #home {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center; /* center icon & text */
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 640px) {
+      :root {
+        --spacing: 1rem;
+      }
+      nav {
+        flex-direction: column;
+        justify-content: center;
+        padding: 0.5rem;
+        height: auto; /* let nav expand to fit content */
+      }
+      .left-nav {
+        margin-bottom: 0.5rem;
+      }
+      .nav-links {
+        justify-content: center;
+      }
+      main {
+        margin-top: 35vh;
+      }
+      .video-container {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 140px;
+      }
+    }
+
+    footer {
       text-align: center;
-    }
-    /* Add padding on the right so video doesn't collide with section edges */
-    #home {
-      padding-right: 220px; /* enough space for 180px video + 40 px gap */
-    }
-
-    /* Main Container */
-    main {
-      margin-top: 30vh; /* less space up top */
-      max-width: var(--max-width);
-      margin: 0 auto;
       padding: var(--spacing);
-    }
-
-    section {
-      margin-bottom: 3rem;
-      background: var(--card-bg);
-      padding: var(--spacing);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      scroll-margin-top: calc(var(--navbar-height) + 20px);
-    }
-
-    /* Big CTA for the App Store */
-    .big-appstore-link {
-      display: block;
-      width: 90%;
-      max-width: 400px;
-      margin: 2rem auto 0 auto;
-      padding: 1rem;
-      text-align: center;
-      border-radius: 25px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      background: linear-gradient(135deg, var(--secondary), var(--primary));
-      color: #fff;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s;
-      text-decoration: none;
-    }
-    .big-appstore-link:hover {
-      transform: translateY(-2px);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
     }
 
     h1, h2, h3 {
@@ -238,41 +252,6 @@
     }
     li {
       margin-bottom: 0.5rem;
-    }
-
-    /* Responsive adjustments for smaller screens */
-    @media (max-width: 640px) {
-      :root {
-        --spacing: 1rem;
-      }
-      nav {
-        flex-direction: column;
-        justify-content: center;
-        padding: 0.5rem;
-      }
-      .left-nav {
-        margin-bottom: 0.5rem;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      main {
-        margin-top: 35vh;
-      }
-      #home {
-        padding-right: 0;
-      }
-      .video-container {
-        right: 0.5rem;
-      }
-    }
-
-    footer {
-      text-align: center;
-      padding: var(--spacing);
-      font-size: 0.9rem;
-      color: var(--text-secondary);
     }
   </style>
 </head>
@@ -301,6 +280,7 @@
         <a href="#support">Support</a>
         <a href="#terms">Terms</a>
       </div>
+      <!-- Optional CTA button in nav if you want -->
       <a class="appstore-btn" href="https://apps.apple.com/us/app/tallyfit/id6737364770" target="_blank">
         Download on the App Store
       </a>
@@ -310,7 +290,7 @@
   <main>
     <!-- HOME Section -->
     <section id="home">
-      <!-- Minimizable video container inside the Home section, pinned to top-right -->
+      <!-- Minimizable video container pinned top-right -->
       <div id="videoHero" class="video-container">
         <video id="promoVideo" autoplay loop playsinline muted>
           <source src="886x1920 TFVideo.mov" type="video/mp4">
@@ -333,11 +313,8 @@
       <p>
         Whether you're a beginner or a seasoned athlete, TallyFit is designed to adapt to your fitness needs.
       </p>
-
-      <!-- Large CTA for the app store -->
-      <a class="big-appstore-link" href="https://apps.apple.com/us/app/tallyfit/id6737364770" target="_blank">
-        Get TallyFit on the App Store
-      </a>
+      <!-- Removed the big "Get TallyFit on the App Store" button 
+           in favor of the Apple Smart App Banner and the existing nav link -->
     </section>
 
     <!-- PRIVACY Section -->
@@ -538,23 +515,11 @@
   </footer>
 
   <script>
-    // References
-    const videoHero   = document.getElementById("videoHero");
-    const promoVideo  = document.getElementById("promoVideo");
+    // Video toggle
+    const videoHero = document.getElementById("videoHero");
+    const promoVideo = document.getElementById("promoVideo");
     const toggleSizeBtn = document.getElementById("toggleSizeBtn");
 
-    // On page load, the video is minimized & muted
-    // Then after 5s, we keep it minimized (remove auto-min or keep?), user can manually maximize to unmute
-    // If you want auto-minimize, uncomment the setTimeout below.
-
-    // window.addEventListener("load", function() {
-    //   setTimeout(function() {
-    //     // If we wanted to do something automatically:
-    //     // Here, it's already minimized in the HTML by default.
-    //   }, 5000);
-    // });
-
-    // Toggle size: minimized => maximized => minimized
     let isMaximized = false;
     toggleSizeBtn.addEventListener("click", function() {
       isMaximized = !isMaximized;
